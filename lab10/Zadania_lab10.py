@@ -52,6 +52,7 @@ def gauss_jordan_macierz(stopien_macierzy, macierz):
 macierz1 = np.array([[2., 1., 3., 7.], [6., 6., 6., 12.], [3., 5., 2., 4.]])
 macierz2 = np.array([[1., 2., 3., 4.], [5., 6., 7., 8.], [9., 10., 11., 12.]])
 macierz3 = np.array([[2., 2., 2.], [1., 3., 2.]])
+# https://www.naukowiec.org/wiedza/matematyka/metoda-gaussa-jordana_622.html
 macierz4 = np.array([[2., 1., 1., 1.], [5., 2., 2., 1.], [2., 1., 3., 0.], [1., 1., 2., 1.]])
 print(gauss_jordan_rownania(3, macierz1))
 print(gauss_jordan_rownania(3, macierz2))
