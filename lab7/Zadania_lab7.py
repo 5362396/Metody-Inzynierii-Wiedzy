@@ -1,6 +1,4 @@
-import math as m
 import numpy as np
-import random
 
 
 # (x, y) = (2, 1), (5, 2), (7, 3), (8, 3)

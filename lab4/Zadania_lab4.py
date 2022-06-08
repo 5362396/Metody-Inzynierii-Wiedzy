@@ -1,6 +1,5 @@
 import math as m
 import numpy as np
-import random
 
 with open("../australian.dat", "r") as file:
     matrix = [list(map(lambda a: float(a), line.split())) for line in file]

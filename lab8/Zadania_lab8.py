@@ -1,9 +1,6 @@
 import math as m
 import numpy as np
 
-np.set_printoptions(formatter={'float_kind': "{:.7f}".format})
-a = np.array([[2, 0], [1, 1], [0, 2]])
-
 
 def projekcja(u, V):
     V_u = np.dot(V.T, u)
@@ -16,6 +13,9 @@ def projekcja(u, V):
 def dlugosc_wektora(u):
     return m.sqrt(np.dot(u.T, u))
 
+
+np.set_printoptions(formatter={'float_kind': "{:.7f}".format})
+a = np.array([[2, 0], [1, 1], [0, 2]])
 
 v_list = [[x[i] for x in a] for i in range(len(a[1]))]
 u_list = []

@@ -1,9 +1,6 @@
 import math as m
 import numpy as np
 
-np.set_printoptions(formatter={'float_kind': "{:.7f}".format})
-a = np.array([[2., 1., 3., 7.], [1., 6., 6., 6.], [3., 6., 1., 2.], [7., 6., 2., 3.]])
-
 
 def projekcja(u, V):
     V_u = np.dot(V.T, u)
@@ -48,17 +45,13 @@ def rekurencja_a(a):
 
 def wartosci_wlasne(a):
     a3 = a
-    licznik = 0
     dim = len(a3[0])
     while (np.diag(a3) - np.dot(a3, np.ones((dim, 1))).T).all() > 0.001:
-        licznik = licznik + 1
         a3 = rekurencja_a(a3)
-        print("A" + str(licznik) + ":")
-        print(a3)
-        print("\n")
     return np.diag(a3)
 
 
+a = np.array([[2., 1., 3., 7.], [1., 6., 6., 6.], [3., 6., 1., 2.], [7., 6., 2., 3.]])
 print("A:")
 print(a)
 print("\n")
@@ -67,3 +60,4 @@ print("\n")
 # https://matrixcalc.org/pl/vectors.html#eigenvectors(%7B%7B2,1,3,7%7D,%7B1,6,6,6%7D,%7B3,6,1,2%7D,%7B7,6,2,3%7D%7D)
 # lambda1 = 16,070 lambda2 = -6,668 lambda3 = 3,937 lambda4 = -1,339
 print("WYNIK:", wynik)
+print("\n")

@@ -1,6 +1,5 @@
 import math as m
 import numpy as np
-import random
 
 
 def srednia_arytmetyczna(lista):
