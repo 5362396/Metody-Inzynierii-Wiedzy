@@ -2,7 +2,6 @@ import math as m
 import numpy as np
 
 np.set_printoptions(formatter={'float_kind': "{:.7f}".format})
-a = np.array([[2., 1., 3., 7.], [1., 6., 6., 6.], [3., 6., 1., 2.], [7., 6., 2., 3.]])
 
 
 def projekcja(u, V):
@@ -21,7 +20,6 @@ def macierz_q(a):
     v_list = [[x[i] for x in a] for i in range(len(a[1]))]
     u_list = []
     q = []
-
     for v in v_list:
         v = np.array(v)
         suma_projekcji = 0
@@ -48,22 +46,46 @@ def rekurencja_a(a):
 
 def wartosci_wlasne(a):
     a3 = a
-    licznik = 0
     dim = len(a3[0])
     while (np.diag(a3) - np.dot(a3, np.ones((dim, 1))).T).all() > 0.001:
-        licznik = licznik + 1
         a3 = rekurencja_a(a3)
-        print("A" + str(licznik) + ":")
-        print(a3)
-        print("\n")
     return np.diag(a3)
 
 
-print("A:")
-print(a)
-print("\n")
-wynik = wartosci_wlasne(a)
-print("\n")
-# https://matrixcalc.org/pl/vectors.html#eigenvectors(%7B%7B2,1,3,7%7D,%7B1,6,6,6%7D,%7B3,6,1,2%7D,%7B7,6,2,3%7D%7D)
-# lambda1 = 16,070 lambda2 = -6,668 lambda3 = 3,937 lambda4 = -1,339
-print("WYNIK:", wynik)
+a = np.array([[1., 2., 0.], [2., 0., 2.]])
+aat = np.dot(a, a.T)
+ata = np.dot(a.T, a)
+wartosci_wlasne_aat = wartosci_wlasne(aat)
+wartosci_wlasne_ata = np.sort(np.linalg.eig(ata)[0])[::-1]
+
+s = np.zeros((2, 3))
+s_temp = np.diag([m.sqrt(i) for i in wartosci_wlasne_aat])
+for i in range(len(s_temp[0])):
+    for j in range(len(s_temp[1])):
+        s[i][j] = s_temp[i][j]
+
+v = []
+for i in range(len(ata[0])):
+    wektor_v = []
+    for j in range(len(ata[0]), 0, -1):
+        wektor_v.append(np.linalg.eigh(ata)[1][i][j-1])
+    v.append(wektor_v)
+v = np.array(v)
+
+u = []
+for i in range(len(aat[0])):
+    u.append(np.dot(a, v.T[i]) * (1 / m.sqrt(wartosci_wlasne_aat[i])))
+u = np.array(u)
+
+print("WARTOŚCI WŁASNE U")
+print(wartosci_wlasne_aat)
+print("WARTOŚCI WŁASNE V")
+print(wartosci_wlasne_ata)
+print("MACIERZ U")
+print(u)
+print("WARTOŚCI SINGULARNE")
+print(s)
+print("MACIERZ V TRANSPONOWANE")
+print(v.T)
+print("SPRAWDZENIE")
+print(np.dot(np.dot(u, s), v.T))
